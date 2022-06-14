@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	tControl.nBLC = m_blc;
 	tControl.nWP = m_Saturate;
 	tControl.nCameraGain = m_nISO * 16 / m_nMinISO;
-	tControl.nFrameNum = m_nFrameNum;
+	tControl.nFrameNum = argc-2;
 	tControl.nCFAPattern = m_nCFAPattern;
 	tControl.nAWBGain[0] = m_fRGain * 256;
 	tControl.nAWBGain[1] = m_fGGain * 256;

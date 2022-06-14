@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.5)
+project(decodeCR2)
+find_library(LIBRAW_LIBRARY NAMES raw raw_r)
+include_directories(${RAW2DNG_INCLUDE_DIRS})
+file(GLOB_RECURSE SRC ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_executable(${PROJECT_NAME} ${SRC})
+target_link_libraries(${PROJECT_NAME} ${LIBRAW_LIBRARY})
