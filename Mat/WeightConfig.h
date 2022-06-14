@@ -36,7 +36,7 @@ private:
 		{
 			if (linestr[i] == '=')
 			{
-				if (linestr[i + 1] == 'H' || linestr[i + 1] == 'h')//Ê®Áù½øÖÆÊýÖµ
+				if (linestr[i + 1] == 'H' || linestr[i + 1] == 'h')//Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 				{
 					if (sscanf(linestr + i + 2, "%x\n", &val) != 1)return false;
 				}
@@ -44,7 +44,7 @@ private:
 				{
 					if (sscanf(linestr + i + 1, "%d\n", &val) != 1)return false;
 				}
-				memcpy(name, linestr, i);//¿½±´name
+				memcpy(name, linestr, i);//ï¿½ï¿½ï¿½ï¿½name
 				name[i] = '\0';
 				return true;
 			}
@@ -62,7 +62,7 @@ public:
 		}
 		m_nConfigParamListCount = 0;
 	}
-	bool ConfigParamListAddVariable(char *pParamName, int *pParamAddr, int nMin=0, int nMax=0x7fffffff,int nScale=1)
+	bool ConfigParamListAddVariable(const char *pParamName, int *pParamAddr, int nMin=0, int nMax=0x7fffffff,int nScale=1)
 	{
 		TConfigParam *pParamItem = new TConfigParam;
 		if (pParamItem == NULL)return false;
@@ -83,7 +83,7 @@ public:
 		m_nConfigParamListCount++;
 		return true;
 	}
-	bool ConfigParamListAddArray(char *pParamName, int pVector[], int nCh, int nMin = 0, int nMax = 0x7fffffff,int nScale = 1)
+	bool ConfigParamListAddArray(const char *pParamName, int pVector[], int nCh, int nMin = 0, int nMax = 0x7fffffff,int nScale = 1)
 	{
 		char ParamName[64];
 		for (int i = 0; i < nCh; i++)
@@ -93,14 +93,14 @@ public:
 		}
 		return true;
 	}
-	bool ConfigParamListAddMatrixRow(char *pParamName, int *pMatrixRow, int nRow, int nCol, int nMin = 0, int nMax = 0x7fffffff,int nScale = 1)
+	bool ConfigParamListAddMatrixRow(const char *pParamName, int *pMatrixRow, int nRow, int nCol, int nMin = 0, int nMax = 0x7fffffff,int nScale = 1)
 	{
 		char ParamName[64];
 		sprintf(ParamName, "%s_%d", pParamName, nRow);
 		if (!ConfigParamListAddArray(ParamName, pMatrixRow, nCol, nMin, nMax, nScale))return false;
 		return true;
 	}
-	TConfigParam * FindConfigParamName(char *pName)
+	TConfigParam * FindConfigParamName(const char *pName)
 	{
 		TConfigParam *pParamItem = m_pConfigParamListFirst;
 		while (pParamItem != NULL)
@@ -170,18 +170,18 @@ public:
 class CSingleConfigTitleFILE
 {
 protected:
-	virtual void CreateConfigTitleName() = 0;//´´½¨±êÌâ----------´¿Ðéº¯ÊýÓÉ×ÓÀàÊµÏÖ
-	virtual void InitConfigParamList() {};//´´½¨²ÎÊýÁÐ±í----------Ðéº¯ÊýÓÐ×ÓÀàÊµÏÖ£¨¹ØÁª³ÉÔ±±äÁ¿m_nConfigParamListÁÐ±í£©
-	virtual void UpdateInternalConfig(){};//¸üÐÂ²ÎÊýÁÐ±í----------Ðéº¯ÊýÓÉ×ÓÀàÊµÏÖ
+	virtual void CreateConfigTitleName() = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½----------ï¿½ï¿½ï¿½éº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+	virtual void InitConfigParamList() {};//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½----------ï¿½éº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½m_nConfigParamListï¿½Ð±ï¿½ï¿½ï¿½
+	virtual void UpdateInternalConfig(){};//ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½----------ï¿½éº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
 public:
-	char m_pConfigTitleName[256];//±êÌâ
-	CConfigParamList m_nConfigParamList;//²ÎÊýÁÐ±í
-	virtual void Initialize()//×ÓÀà³õÊ¼»¯ÖÐÏÈµ÷ÓÃËûÍê³É¸¸ÀàÐé»¯º¯ÊýµÄÊµÏÖ
+	char m_pConfigTitleName[256];//ï¿½ï¿½ï¿½ï¿½
+	CConfigParamList m_nConfigParamList;//ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+	virtual void Initialize()//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¸ï¿½ï¿½ï¿½ï¿½é»¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
 	{
 		CreateConfigTitleName();
 		InitConfigParamList();
 	}
-	virtual bool LoadConfigFile(char *pConfigFileName)//×ÓÀàÃ»ÓÐÊµÏÖÓÐ¸¸ÀàÊµÏÖ
+	virtual bool LoadConfigFile(char *pConfigFileName)//ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Êµï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½Êµï¿½ï¿½
 	{
 		char ConfigTitleName[64];
 		FILE *fp=fopen(pConfigFileName, "rt");
@@ -210,8 +210,8 @@ public:
 	{
 		FILE *fp=fopen(pFileName, "wt");
 		if(fp==NULL)return false;
-		fprintf(fp, "\n%s\n", m_pConfigTitleName);//±£´æ±êÌâ
-		if (!m_nConfigParamList.SaveParamListToFile(fp))//±£´æ²ÎÊýÁÐ±í
+		fprintf(fp, "\n%s\n", m_pConfigTitleName);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if (!m_nConfigParamList.SaveParamListToFile(fp))//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 		{
 			fclose(fp);
 			return false;
@@ -225,18 +225,18 @@ class CMultiConfigFILE : public CSingleConfigTitleFILE
 protected:
 	typedef struct tagConfigTitleList
 	{
-		CSingleConfigTitleFILE *pSingleConfigTitleFILE;//µ¥ÏîÀàÖ¸Õë
-		tagConfigTitleList *pTitleListNext;//µ¥Ïî±íÖ¸Õë
+		CSingleConfigTitleFILE *pSingleConfigTitleFILE;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+		tagConfigTitleList *pTitleListNext;//ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 		tagConfigTitleList()
 		{
 			pSingleConfigTitleFILE =NULL;
 			pTitleListNext =NULL;
 		}
-	}TConfigTitleList;//´æ·Å¶à¸öµ¥ÎÄµµ
+	}TConfigTitleList;//ï¿½ï¿½Å¶ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½
 	TConfigTitleList *m_pConfigTitleListFirst;
 	TConfigTitleList *m_pConfigTitleListLast;
 	int m_nConfigTitleListCount;
-	void ClearMultiConfigMem()//½«first,last,nextÏàµÈ¾ÍÏàµ±ÓÚÃ»ÓÐ countÒ²¹é0
+	void ClearMultiConfigMem()//ï¿½ï¿½first,last,nextï¿½ï¿½È¾ï¿½ï¿½àµ±ï¿½ï¿½Ã»ï¿½ï¿½ countÒ²ï¿½ï¿½0
 	{
 		while (m_pConfigTitleListFirst != NULL)
 		{
@@ -265,13 +265,13 @@ protected:
 		m_pConfigTitleListLast = pTmpTitleList;
 		m_nConfigTitleListCount++;
 	}
-	virtual void CreateConfigTitleNameList()=0;//ÓÉ×ÓÀàÊµÏÖ
+	virtual void CreateConfigTitleNameList()=0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
 public: 
-	virtual void Initialize()//×ÓÀà³õÊ¼»¯ÖÐ
+	virtual void Initialize()//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 	{
-		CreateConfigTitleName();//×Ü±êÌâ´´½¨
-		CreateConfigTitleNameList();//·Ö±êÌâ´´½¨
-		InitConfigParamList();//±êÌâÏÂÃæµÄ²ÎÊý´´½¨
+		CreateConfigTitleName();//ï¿½Ü±ï¿½ï¿½â´´ï¿½ï¿½
+		CreateConfigTitleNameList();//ï¿½Ö±ï¿½ï¿½â´´ï¿½ï¿½
+		InitConfigParamList();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 	CMultiConfigFILE()
 	{
@@ -282,7 +282,7 @@ public:
 	{
 		ClearMultiConfigMem();
 	}
-	virtual bool LoadMultiConfigFile(char *pFileName)
+	virtual bool LoadMultiConfigFile(const char *pFileName)
 	{
 		char pConfigTitle[64];
 		FILE *fp = fopen(pFileName, "rt");
@@ -298,15 +298,15 @@ public:
 			fclose(fp);
 			return false;
 		}
-		if (!m_nConfigParamList.LoadParamListFromFile(fp))//±¾ÉíÕâ¸öÀà±£´æµÄ±êÌâºÍ²ÎÊý£¨³ÉÔ±±äÁ¿ÓÃ×ÓÀàµÄ£©
+		if (!m_nConfigParamList.LoadParamListFromFile(fp))//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à±£ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½
 		{
 			fclose(fp);
 			return false;
 		}
 		int i = 0;
-		while (i < m_nConfigTitleListCount)//´ÓÁ´±íÖÐÈ¡
+		while (i < m_nConfigTitleListCount)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡
 		{
-			if (fscanf(fp, "\n%s\n", pConfigTitle) <= 0) //ÎÄ¼þÖÐ¶ÁÈ¡Ò»ÐÐ
+			if (fscanf(fp, "\n%s\n", pConfigTitle) <= 0) //ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½È¡Ò»ï¿½ï¿½
 			{
 				fclose(fp);
 				return false;
@@ -315,7 +315,7 @@ public:
 			TConfigTitleList *pTmpTitleList = m_pConfigTitleListFirst;
 			while (pTmpTitleList != NULL)
 			{
-				if ((strcmp(pTmpTitleList->pSingleConfigTitleFILE->m_pConfigTitleName, pConfigTitle) == 0))//¶Ô±ÈÎÄ¼þÖÐ¶ÁÈ¡µÄºÍÁ´±íÖÐµÄÓÐµÄ»°¾Í½«Á´±íÖÐµÄÏîÈ¡³öÀ´
+				if ((strcmp(pTmpTitleList->pSingleConfigTitleFILE->m_pConfigTitleName, pConfigTitle) == 0))//ï¿½Ô±ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½È¡ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ÐµÄ»ï¿½ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 				{
 					pSingleConfig= pTmpTitleList->pSingleConfigTitleFILE;
 					break;
@@ -338,17 +338,17 @@ public:
 		fclose(fp);
 		return true;
 	}
-	virtual bool SaveMultiConfigFile(char *pFileName)
+	virtual bool SaveMultiConfigFile(const char *pFileName)
 	{
 		FILE *fp = fopen(pFileName, "wt");
 		if (fp == NULL)return false;
-		fprintf(fp, "\n%s\n", m_pConfigTitleName);//±¾ÉíÕâ¸öÀà±£´æµÄ±êÌâºÍ²ÎÊý£¨³ÉÔ±±äÁ¿ÓÃ×ÓÀàµÄ£©
+		fprintf(fp, "\n%s\n", m_pConfigTitleName);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à±£ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½
 		if (!m_nConfigParamList.SaveParamListToFile(fp))
 		{
 			fclose(fp);
 			return false;
 		}
-		TConfigTitleList *pTmpTitleList = m_pConfigTitleListFirst;//ÎÄ¼þ±êÌâÁ´±íÈ¡Êý¾Ý´ÓµÚÒ»¸öÈ¡
+		TConfigTitleList *pTmpTitleList = m_pConfigTitleListFirst;//ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý´Óµï¿½Ò»ï¿½ï¿½È¡
 		while (pTmpTitleList != NULL)
 		{
 			fprintf(fp, "\n%s\n", pTmpTitleList->pSingleConfigTitleFILE->m_pConfigTitleName);
@@ -357,7 +357,7 @@ public:
 				fclose(fp);
 				return false;
 			}
-			pTmpTitleList = pTmpTitleList->pTitleListNext;//È¡ÏÂÒ»¸ö
+			pTmpTitleList = pTmpTitleList->pTitleListNext;//È¡ï¿½ï¿½Ò»ï¿½ï¿½
 		}
 		fclose(fp);
 		return true;

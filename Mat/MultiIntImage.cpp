@@ -93,7 +93,7 @@ bool MultIntImage::BGRHToBGR(MultiUshortImage *pOutBGRImage)
 	}
 	return true;
 }
-bool MultIntImage::SaveBGRHToBitmapFile(char *pFileName, int nB, int nG, int nR, int nH)
+bool MultIntImage::SaveBGRHToBitmapFile(const char *pFileName, int nB, int nG, int nR, int nH)
 {
 	int i, x, y, BGRH[4], E[3];
 	int nWidth=GetImageWidth();
@@ -131,7 +131,7 @@ bool MultIntImage::SaveBGRHToBitmapFile(char *pFileName, int nB, int nG, int nR,
 	}
 	return BGRImage.SaveBGRToBitmapFile(pFileName);
 }
-bool MultIntImage::SaveSingleChannelToBitmapFile(char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset)
+bool MultIntImage::SaveSingleChannelToBitmapFile(const char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset)
 {
 	int x, y;
 	long long Y, tY, E;

@@ -57,7 +57,7 @@ __inline int Positive(int value)
 {
 	return (value >= 0) ? (value) : (0);
 }
-/////-thre------0-------+thre//dÐ¡ÓÚthre·¶Î§ÀàµÄÈ¡0·¶Î§ÍâµÄÈ¡d-thre
+/////-thre------0-------+thre//dÐ¡ï¿½ï¿½threï¿½ï¿½Î§ï¿½ï¿½ï¿½È¡0ï¿½ï¿½Î§ï¿½ï¿½ï¿½È¡d-thre
 __inline int SoftThre(int d, int nThre)
 {
 	int flag = 0;
@@ -265,10 +265,10 @@ inline void RGBToHSVf(float R, float G, float B, float& H, float& S, float&V)
 	// h = [0,360], s = [0,1], v = [0,1]
 	// if s == 0, then h = -1 (undefined)
 	float min, max, delta, tmp;
-	tmp = min(R, G);
-	min = min(tmp, B);
-	tmp = max(R, G);
-	max = max(tmp, B);
+	tmp = std::min(R, G);
+	min = std::min(tmp, B);
+	tmp = std::max(R, G);
+	max = std::max(tmp, B);
 	V = max; // v
 	delta = max - min;
 	if (max != 0)

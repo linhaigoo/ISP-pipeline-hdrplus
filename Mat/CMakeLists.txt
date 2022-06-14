@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.5)
+project(Mat)
+
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+else()
+    add_compile_options(-fPIC)
+endif()
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+file(GLOB_RECURSE SRC ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+add_library(${PROJECT_NAME} STATIC ${SRC})

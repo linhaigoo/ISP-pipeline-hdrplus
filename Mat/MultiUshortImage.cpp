@@ -105,7 +105,7 @@ bool MultiUshortImage::GetBGGRMean(double fMean[])
 	fMean[3] /= C;
 	return true;
 }
-bool MultiUshortImage::Extend2Image(MultiUshortImage *pInImage, MultiUshortImage *pOutImage,int nS)//2µÄx´Î·½
+bool MultiUshortImage::Extend2Image(MultiUshortImage *pInImage, MultiUshortImage *pOutImage,int nS)//2ï¿½ï¿½xï¿½Î·ï¿½
 {
 	if (nS < 0)return false;
 	int nMask = (1 << nS) - 1;
@@ -589,9 +589,9 @@ bool MultiUshortImage::ConverterRawDataToISPRawData(char *pInputRawData, int nWi
 		return false;
 	}
 }
-bool MultiUshortImage::Load16BitRawDataFromBinFile(char *pFileName, int nWidth, int nHeight, int nBits, bool bHighBit, bool bByteOrder, int nMIPIRAW)//bByteOrderÐ¡¶ËÕý³£¶¼ÊÇÐ¡¶ËÄ£Ê½£¨Ð¡¶Ë×Ö½ÚÐò¾ÍÊÇ×îµÍÓÐÐ§×Ö½ÚÂäÔÚµÍµØÖ·ÉÏµÄ×Ö½Ú´æ·Å·½Ê½£©bHighBit ¸ßµÍÎ»ÓÐÐ§ nMIPIRAW==0±íÊ¾²»ÊÇmipi ÆäËû±íÊ¾²»Í¬mipi
+bool MultiUshortImage::Load16BitRawDataFromBinFile(char *pFileName, int nWidth, int nHeight, int nBits, bool bHighBit, bool bByteOrder, int nMIPIRAW)//bByteOrderÐ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä£Ê½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ÚµÍµï¿½Ö·ï¿½Ïµï¿½ï¿½Ö½Ú´ï¿½Å·ï¿½Ê½ï¿½ï¿½bHighBit ï¿½ßµï¿½Î»ï¿½ï¿½Ð§ nMIPIRAW==0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½mipi ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Í¬mipi
 {
-	if (nMIPIRAW == 0)//0±íÊ¾²»ÊÇmipiÆäËû´ú±í²»Í¬mipi
+	if (nMIPIRAW == 0)//0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½mipiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬mipi
 	{
 		int x, y, g;
 		int mask = (1 << nBits) - 1;
@@ -1403,21 +1403,21 @@ bool MultiUshortImage::Bilateral5x5SingleImage(int nThre)
 }
 void MultiUshortImage::GetMultiImageIntegralUSData(CImageData_UINT32 *Integral, int Width, int Height,int dim)
 {
-	unsigned int *ColSum = (unsigned int *)calloc(Width*dim, sizeof(unsigned int));        //    ÓÃµÄcallocº¯ÊýÅ¶£¬×Ô¶¯ÄÚ´æÇå0
+	unsigned int *ColSum = (unsigned int *)calloc(Width*dim, sizeof(unsigned int));        //    ï¿½Ãµï¿½callocï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ú´ï¿½ï¿½ï¿½0
 	memset(Integral->GetImageData(), 0, (Width + 1)*dim * sizeof(unsigned int));
 	for (int y = 0; y < Height; y++)
 	{
 		unsigned short *LinePS = GetImageLine(y);// pInData + y * Stride;
-		unsigned int *LinePD = Integral->GetImageLine(y + 1) + dim;// +(y + 1) * (Width + 1) + 1;//»ý·ÖÍ¼1 1¿ªÊ¼Ò»ÐÐÆðÊ¼
+		unsigned int *LinePD = Integral->GetImageLine(y + 1) + dim;// +(y + 1) * (Width + 1) + 1;//ï¿½ï¿½ï¿½ï¿½Í¼1 1ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½Ê¼
 		for (int k=0;k<dim;k++)
 		{
 			LinePD[-dim+k] = 0;
 		}
-		for (int x = 0; x < Width; x++)//ÐÐ·½ÏòµÄ»ý·ÖÀÛ¼Ó
+		for (int x = 0; x < Width; x++)//ï¿½Ð·ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 		{
 			for (int k=0;k<dim;k++)
 			{
-				ColSum[x*dim+k] += LinePS[x*dim+k];//ColSumÍ³¼ÆµÄÊÇµÄÀÛ¼ÓLinePSÍ³¼ÆÐÐµÄÀÛ¼Ó
+				ColSum[x*dim+k] += LinePS[x*dim+k];//ColSumÍ³ï¿½Æµï¿½ï¿½Çµï¿½ï¿½Û¼ï¿½LinePSÍ³ï¿½ï¿½ï¿½Ðµï¿½ï¿½Û¼ï¿½
 				LinePD[x*dim+k] = LinePD[(x - 1)*dim+k] + ColSum[x*dim+k];
 			}
 		}
@@ -1456,7 +1456,7 @@ bool MultiUshortImage::GetEachBlockAverageValue(int nRadius)
 	}
 	return true;
 }
-bool MultiUshortImage::SaveSingleChannelToBitmapFile(char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset)
+bool MultiUshortImage::SaveSingleChannelToBitmapFile(const char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset)
 {
 	int x, y, Y, tY, E;
 	int nWidth = GetImageWidth();

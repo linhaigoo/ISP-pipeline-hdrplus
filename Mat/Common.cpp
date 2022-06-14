@@ -109,9 +109,9 @@ extern void HistIntToHistfloat(int pHist[256], float pfHist[256])
 {
 	for (int i = 1; i < 256; i++)
 	{
-		pHist[i] += pHist[i - 1];//ÀÛ¼ÆpHist´ú±íÕâ¸öÁÁ¶ÈÖ®Ç°ËùÓÐµÄ×ÜºÍ
+		pHist[i] += pHist[i - 1];//ï¿½Û¼ï¿½pHistï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½Ðµï¿½ï¿½Üºï¿½
 	}
-	//pHist[255]´ú±í×ÜÊýÁ¿=nx*ny;
+	//pHist[255]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=nx*ny;
 	for (int i = 0; i < 256; i++)
 		pfHist[i] = (float)pHist[i] / (float)pHist[255];
 }
@@ -120,22 +120,22 @@ extern void FindHistSpecification(float SrcHistNum[256], float DstHistNum[256], 
 	float minValue = 0;
 	float srcMin[256][256];
 	short lastStartY = 0, lastEndY = 0, startY = 0, endY = 0;
-	//Í¼ÏñÃ¿¸öµÈ¼¶ÊýÁ¿ÓëÁ½Ò»¸öÍ¼ÏñµÈ¼¶ÊýÁ¿
+	//Í¼ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Í¼ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	for (int y = 0; y < 256; y++)
 	{
 		for (int x = 0; x < 256; x++)
 		{
-			srcMin[x][y] = fabs(SrcHistNum[y] - DstHistNum[x]);//srcMin[x][y]¼ÇÂ¼Ô­Ö±·½Í¼µÚy¸öÊý¾ÝÓë
+			srcMin[x][y] = fabs(SrcHistNum[y] - DstHistNum[x]);//srcMin[x][y]ï¿½ï¿½Â¼Ô­Ö±ï¿½ï¿½Í¼ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 	}
-	for (int x = 0; x < 256; x++)//Ò»Î¬ÕÒµ½×îÐ¡
+	for (int x = 0; x < 256; x++)//Ò»Î¬ï¿½Òµï¿½ï¿½ï¿½Ð¡
 	{
 		minValue = srcMin[x][0];
-		for (int y = 0; y < 256; y++)//´Ó¶þÎ¬ÕÒµ½×îÐ¡µÄ
+		for (int y = 0; y < 256; y++)//ï¿½Ó¶ï¿½Î¬ï¿½Òµï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 		{
 			if (minValue > srcMin[x][y])
 			{
-				endY = y;//¼ÇÂ¼×îÐ¡µÄÎ»×Ó
+				endY = y;//ï¿½ï¿½Â¼ï¿½ï¿½Ð¡ï¿½ï¿½Î»ï¿½ï¿½
 				minValue = srcMin[x][y];
 			}
 		}
@@ -239,7 +239,7 @@ extern void HGaussianLine3(unsigned char *pInLine, unsigned short *pOutLine, int
 	}
 	pOutLine += nChannel;
 }
-extern void VGaussianLine3(unsigned short *pInLines[3], unsigned char *pOutLine, int nWidth,int nChannel)//½»Ìæ´æ´¢
+extern void VGaussianLine3(unsigned short *pInLines[3], unsigned char *pOutLine, int nWidth,int nChannel)//ï¿½ï¿½ï¿½ï¿½æ´¢
 {
 	int  x;
 	x = 0;
@@ -548,16 +548,16 @@ extern void Erosion3x3Line(unsigned char *pInLines[], unsigned char *pOutLine, i
 }
 extern void GetImageIntegralData(unsigned char *pInData, unsigned int *Integral, int Width, int Height, int Stride)
 {
-	unsigned int *ColSum = (unsigned int *)calloc(Width, sizeof(unsigned int));        //    ÓÃµÄcallocº¯ÊýÅ¶£¬×Ô¶¯ÄÚ´æÇå0
+	unsigned int *ColSum = (unsigned int *)calloc(Width, sizeof(unsigned int));        //    ï¿½Ãµï¿½callocï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ú´ï¿½ï¿½ï¿½0
 	memset(Integral, 0, (Width + 1) * sizeof(unsigned int));
 	for (int Y = 0; Y < Height; Y++)
 	{
 		unsigned char *LinePS = pInData + Y * Stride;
-		unsigned int *LinePD = Integral + (Y + 1) * (Width + 1) + 1;//»ý·ÖÍ¼1 1¿ªÊ¼Ò»ÐÐÆðÊ¼
+		unsigned int *LinePD = Integral + (Y + 1) * (Width + 1) + 1;//ï¿½ï¿½ï¿½ï¿½Í¼1 1ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½Ê¼
 		LinePD[-1] = 0;
-		for (int X = 0; X < Width; X++)//ÐÐ·½ÏòµÄ»ý·ÖÀÛ¼Ó
+		for (int X = 0; X < Width; X++)//ï¿½Ð·ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 		{
-			ColSum[X] += LinePS[X];//ColSumÍ³¼ÆµÄÊÇµÄÀÛ¼ÓLinePSÍ³¼ÆÐÐµÄÀÛ¼Ó
+			ColSum[X] += LinePS[X];//ColSumÍ³ï¿½Æµï¿½ï¿½Çµï¿½ï¿½Û¼ï¿½LinePSÍ³ï¿½ï¿½ï¿½Ðµï¿½ï¿½Û¼ï¿½
 			LinePD[X] = LinePD[X - 1] + ColSum[X];
 		}
 	}
@@ -565,16 +565,16 @@ extern void GetImageIntegralData(unsigned char *pInData, unsigned int *Integral,
 }
 extern void GetImageIntegralSData(short *pInData, unsigned int *Integral, int Width, int Height, int Stride)
 {
-	unsigned int *ColSum = (unsigned int *)calloc(Width, sizeof(unsigned int));        //    ÓÃµÄcallocº¯ÊýÅ¶£¬×Ô¶¯ÄÚ´æÇå0
+	unsigned int *ColSum = (unsigned int *)calloc(Width, sizeof(unsigned int));        //    ï¿½Ãµï¿½callocï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ú´ï¿½ï¿½ï¿½0
 	memset(Integral, 0, (Width + 1) * sizeof(unsigned int));
 	for (int Y = 0; Y < Height; Y++)
 	{
 		short *LinePS = pInData + Y * Stride;
-		unsigned int *LinePD = Integral + (Y + 1) * (Width + 1) + 1;//»ý·ÖÍ¼1 1¿ªÊ¼Ò»ÐÐÆðÊ¼
+		unsigned int *LinePD = Integral + (Y + 1) * (Width + 1) + 1;//ï¿½ï¿½ï¿½ï¿½Í¼1 1ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½Ê¼
 		LinePD[-1] = 0;
-		for (int X = 0; X < Width; X++)//ÐÐ·½ÏòµÄ»ý·ÖÀÛ¼Ó
+		for (int X = 0; X < Width; X++)//ï¿½Ð·ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 		{
-			ColSum[X] += LinePS[X];//ColSumÍ³¼ÆµÄÊÇµÄÀÛ¼ÓLinePSÍ³¼ÆÐÐµÄÀÛ¼Ó
+			ColSum[X] += LinePS[X];//ColSumÍ³ï¿½Æµï¿½ï¿½Çµï¿½ï¿½Û¼ï¿½LinePSÍ³ï¿½ï¿½ï¿½Ðµï¿½ï¿½Û¼ï¿½
 			LinePD[X] = LinePD[X - 1] + ColSum[X];
 		}
 	}
@@ -582,16 +582,16 @@ extern void GetImageIntegralSData(short *pInData, unsigned int *Integral, int Wi
 }
 extern void GetImageIntegralUSData(unsigned short *pInData, unsigned int *Integral, int Width, int Height, int Stride)
 {
-	unsigned int *ColSum = (unsigned int *)calloc(Width, sizeof(unsigned int));        //    ÓÃµÄcallocº¯ÊýÅ¶£¬×Ô¶¯ÄÚ´æÇå0
+	unsigned int *ColSum = (unsigned int *)calloc(Width, sizeof(unsigned int));        //    ï¿½Ãµï¿½callocï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ú´ï¿½ï¿½ï¿½0
 	memset(Integral, 0, (Width + 1) * sizeof(unsigned int));
 	for (int Y = 0; Y < Height; Y++)
 	{
 		unsigned short *LinePS = pInData + Y * Stride;
-		unsigned int *LinePD = Integral + (Y + 1) * (Width + 1) + 1;//»ý·ÖÍ¼1 1¿ªÊ¼Ò»ÐÐÆðÊ¼
+		unsigned int *LinePD = Integral + (Y + 1) * (Width + 1) + 1;//ï¿½ï¿½ï¿½ï¿½Í¼1 1ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½Ê¼
 		LinePD[-1] = 0;
-		for (int X = 0; X < Width; X++)//ÐÐ·½ÏòµÄ»ý·ÖÀÛ¼Ó
+		for (int X = 0; X < Width; X++)//ï¿½Ð·ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 		{
-			ColSum[X] += LinePS[X];//ColSumÍ³¼ÆµÄÊÇµÄÀÛ¼ÓLinePSÍ³¼ÆÐÐµÄÀÛ¼Ó
+			ColSum[X] += LinePS[X];//ColSumÍ³ï¿½Æµï¿½ï¿½Çµï¿½ï¿½Û¼ï¿½LinePSÍ³ï¿½ï¿½ï¿½Ðµï¿½ï¿½Û¼ï¿½
 			LinePD[X] = LinePD[X - 1] + ColSum[X];
 		}
 	}
@@ -2107,7 +2107,7 @@ extern void ComputeCornernessLine(unsigned char *pInLines[], float *pOutLine, in
 		}
 	}
 }
-extern __inline float ComputeHarrisCorner(unsigned char nYWin[][11], int x, int y,float fHarris_K)
+extern float ComputeHarrisCorner(unsigned char nYWin[][11], int x, int y,float fHarris_K)
 {
 	int i, x1, y1, gx, gy, iX2, iXY, iY2;
 	float sX2, sXY, sY2;
@@ -2353,13 +2353,13 @@ extern inline void ftofHSmoothLinex7(float *pInLine, float *pOutLine, int nWidth
 		pOutLine += 4;	
 #else
 		pOutLine[0] = (pIn[0][0] + pIn[6][0])*k[0] + (pIn[1][0] + pIn[5][0]) *k[1] + (pIn[2][0] + pIn[4][0]) *k[2] + pIn[3][0] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pOutLine[0] = (pIn[0][1] + pIn[6][1])*k[0] + (pIn[1][1] + pIn[5][1]) *k[1] + (pIn[2][1] + pIn[4][1]) *k[2] + pIn[3][1] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pOutLine[0] = (pIn[0][2] + pIn[6][2])*k[0] + (pIn[1][2] + pIn[5][2]) *k[1] + (pIn[2][2] + pIn[4][2]) *k[2] + pIn[3][2] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pOutLine[0] = (pIn[0][3] + pIn[6][3])*k[0] + (pIn[1][3] + pIn[5][3]) *k[1] + (pIn[2][3] + pIn[4][3]) *k[2] + pIn[3][3] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 #endif
 		pIn[0] += 4;
 		pIn[1] += 4;
@@ -2404,7 +2404,7 @@ extern inline void ftofHSmoothLinex7(float *pInLine, float *pOutLine, int nWidth
 }
 extern inline void ftofVSmoothLinex7(float *pInLines[], float *pOutLine, int nWidth)
 {
-	//float k[4] = { 0.026267f,0.100742f,0.225511f,0.29496f };
+	float k[4] = { 0.026267f,0.100742f,0.225511f,0.29496f };
 	float *pIn[7];
 #ifdef USE_NEON
 	float32x4_t sum;
@@ -2700,7 +2700,7 @@ extern inline void stofHSmooth7Line(unsigned short *pInLine, float *pOutLine, in
 		Y += (pIn[2][0] + pIn[4][0]) *k[2];
 		Y += pIn[3][0] * k[3];
 		pOutLine[0] = Y;
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pIn[0] = pIn[1];
 		pIn[1] = pIn[2];
 		pIn[2] = pIn[3];
@@ -2721,13 +2721,13 @@ extern inline void stofHSmooth7Line(unsigned short *pInLine, float *pOutLine, in
 		pOutLine += 4;	
 #else
 		pOutLine[0] = (pIn[0][0] + pIn[6][0])*k[0] + (pIn[1][0] + pIn[5][0]) *k[1] + (pIn[2][0] + pIn[4][0]) *k[2] + pIn[3][0] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pOutLine[0] = (pIn[0][1] + pIn[6][1])*k[0] + (pIn[1][1] + pIn[5][1]) *k[1] + (pIn[2][1] + pIn[4][1]) *k[2] + pIn[3][1] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pOutLine[0] = (pIn[0][2] + pIn[6][2])*k[0] + (pIn[1][2] + pIn[5][2]) *k[1] + (pIn[2][2] + pIn[4][2]) *k[2] + pIn[3][2] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 		pOutLine[0] = (pIn[0][3] + pIn[6][3])*k[0] + (pIn[1][3] + pIn[5][3]) *k[1] + (pIn[2][3] + pIn[4][3]) *k[2] + pIn[3][3] * k[3];
-		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0¿ì\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
+		pOutLine += 1;//+5\CA\C7?\C1\CB\C8\C3\CF\E0\C1?\C45\D0ï¿½ï¿½\C4\CA\FD\BE?\E5\C8?\C6\E4\D6Ð¢\AC\B8\F8\BA\F3\C3\E6\B5?\B9?\B7\BD\CF\F2?\C3\E8\D7\F6?\B1\B8\CF\E0\C1?\C45\D0\D0
 #endif
 		pIn[0] += 4;
 		pIn[1] += 4;

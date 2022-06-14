@@ -678,12 +678,6 @@ typedef CMat<int64_t> CImageData_INT64;
 typedef CMat<float> CImage_FLOAT;
 
 template <class T>
-class CArray3D
-{
-	template <class T>
-	class CArray2D
-	{
-		template <class T>
 		class CArray1D
 		{
 		public:
@@ -708,6 +702,10 @@ class CArray3D
 			T* p;
 			T _a;
 		};
+
+			template <class T>
+	class CArray2D
+	{
 	public:
 		CArray2D() :p(NULL) {}
 		void set(T a, T b)
@@ -732,6 +730,10 @@ class CArray3D
 		CArray1D<T>* p;
 		T _b;
 	};
+
+template <class T>
+class CArray3D
+{
 public:
 	CArray3D(T a, T b, T c)
 	{

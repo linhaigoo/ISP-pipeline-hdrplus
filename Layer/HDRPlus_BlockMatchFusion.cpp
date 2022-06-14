@@ -140,6 +140,7 @@ bool CHDRPlus_BlockMatchFusion::BoxDownx2(MultiUshortImage *pInImage, MultiUshor
 			}
 		}
 	}
+	return true;
 }
 bool CHDRPlus_BlockMatchFusion::EstimatedOffsetNoRef(MultiUshortImage *pInRefImage, MultiUshortImage *pInDebugImage, MultiShortImage *pOutOffsetxImage, MultiShortImage *pOutOffsetyImage, int nMoveRangex, int nMoveRangey)
 {
@@ -287,7 +288,7 @@ bool CHDRPlus_BlockMatchFusion::EstimatedOffsetAndRef(MultiUshortImage *pInRefIm
 			int PreOffsety = *PreOffsetyline++;
 			int Predebugy = y + PreOffsety;
 			int Predebugx = x + PreOffsetx;
-			//ÕâÈı¸ö³õÊ¼ÖµºóÃæÖØĞÂ¹æ»®»áÓ°Ïìµ½¶¯Ì¬ÎïÌåµÄÇåÎú¶È
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¹æ»®ï¿½ï¿½Ó°ï¿½ìµ½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			short Bestofsetx = PreOffsety;
 			short Bestofsety = PreOffsetx;
 			unsigned int MinSad = InitMinSad;//
@@ -453,13 +454,13 @@ void CHDRPlus_BlockMatchFusion::MergeTemporal(MultiUshortImage *pRawPadImage, in
 				int Newx = 0;
 				if (k == 0)
 				{
-					weiget = (unsigned short)((float)SCALEVALUE / (*pTotalWeight++));//·Å´ó2µÄ14´Î·½
+					weiget = (unsigned short)((float)SCALEVALUE / (*pTotalWeight++));//ï¿½Å´ï¿½2ï¿½ï¿½14ï¿½Î·ï¿½
 					Newy = y;
 					Newx = x;
 				}
 				else
 				{
-					weiget = (unsigned short)((float)SCALEVALUE * (*pWeightline++) / (*pTotalWeight++));//·Å´ó2µÄ14´Î·½
+					weiget = (unsigned short)((float)SCALEVALUE * (*pWeightline++) / (*pTotalWeight++));//ï¿½Å´ï¿½2ï¿½ï¿½14ï¿½Î·ï¿½
 					Newy = y + (*PreOffsetyline++) * 2;
 					Newx = x + (*PreOffsetxline++) * 2;
 				}
@@ -561,7 +562,7 @@ void CHDRPlus_BlockMatchFusion::MergeWeight(MultiUshortImage *pOutMergeSingleIma
 		}
 	}
 }
-bool CHDRPlus_BlockMatchFusion::UpScaleOffsetAndValuex2(MultiShortImage *pInImage, MultiShortImage *pOutImage)//Ğ¡ ´ó
+bool CHDRPlus_BlockMatchFusion::UpScaleOffsetAndValuex2(MultiShortImage *pInImage, MultiShortImage *pOutImage)//Ğ¡ ï¿½ï¿½
 {
 	int nWidth = pInImage->GetImageWidth();
 	int nHeight = pInImage->GetImageHeight();
@@ -597,6 +598,7 @@ bool CHDRPlus_BlockMatchFusion::UpScaleOffsetAndValuex2(MultiShortImage *pInImag
 			*pline1++ = tmp;
 		}
 	}
+	return true;
 }
 void CHDRPlus_BlockMatchFusion::Forward(MultiUshortImage *pInImages, int nFrameID[], int Framenum, TGlobalControl *pControl)
 {
@@ -614,7 +616,7 @@ void CHDRPlus_BlockMatchFusion::Forward(MultiUshortImage *pInImages, int nFrameI
 		}
 		else
 		{
-			nGain = pControl->nEQGain;//lenshadingÖ®ºóµÄ
+			nGain = pControl->nEQGain;//lenshadingÖ®ï¿½ï¿½ï¿½
 		}
 		if (nGain < m_nGainList[0])
 		{
@@ -649,7 +651,7 @@ void CHDRPlus_BlockMatchFusion::Forward(MultiUshortImage *pInImages, int nFrameI
 	{
 		pInraw[k] = pInImages[nFrameID[k]].GetImageData();
 	}
-	//×î´óÖ§³Ö10Ö¡ÊäÈë
+	//ï¿½ï¿½ï¿½Ö§ï¿½ï¿½10Ö¡ï¿½ï¿½ï¿½ï¿½
 	/////swap first frame and last frame////
 	int div = 128;
 	/*unsigned short *ptmpraw = pInraw[0];

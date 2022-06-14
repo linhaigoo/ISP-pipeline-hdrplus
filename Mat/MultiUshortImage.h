@@ -50,6 +50,6 @@ public:
 	bool Bilateral5x5SingleImage(int nThre);
 	void GetMultiImageIntegralUSData(CImageData_UINT32 * Integral, int Width, int Height, int dim);
 	bool GetEachBlockAverageValue(int nRadius);
-	bool SaveSingleChannelToBitmapFile(char * pFileName, int nChannel, int nInScale, int nOutScale, int nOffset);
+	bool SaveSingleChannelToBitmapFile(const char * pFileName, int nChannel, int nInScale, int nOutScale, int nOffset);
 };
 #endif

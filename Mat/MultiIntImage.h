@@ -19,8 +19,8 @@ public:
 	bool BGRHToBGR(MultiUcharImage *pOutBGRImage);
 	bool BGRHToBGR(MultiUshortImage * pOutBGRImage);
 	bool GaussianBlur7x7Image(MultIntImage *pOutImage);
-	bool SaveBGRHToBitmapFile(char *pFileName, int nB, int nG, int nR, int nH);
-	bool SaveSingleChannelToBitmapFile(char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset);
+	bool SaveBGRHToBitmapFile(const char *pFileName, int nB, int nG, int nR, int nH);
+	bool SaveSingleChannelToBitmapFile(const char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset);
 };
 #endif
 

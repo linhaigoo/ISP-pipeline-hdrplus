@@ -256,7 +256,7 @@ bool MultiShortImage::AddImage(MultiShortImage *pRefImage)
 	}
 	return true;
 }
-bool MultiShortImage::SaveSingleChannelToBitmapFile(char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset)
+bool MultiShortImage::SaveSingleChannelToBitmapFile(const char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset)
 {
 	int x, y, Y, tY;
 	int nWidth = GetImageWidth();

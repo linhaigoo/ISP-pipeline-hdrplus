@@ -28,7 +28,7 @@ public:
 	bool BGRHToRGB(MultiUshortImage * pOutRGBImage);
 	bool ApplyWeight(MultiUshortImage * pWeightImage, int ScaleBit);
 	bool AddImage(MultiShortImage * pRefImage);
-	bool SaveSingleChannelToBitmapFile(char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset);
+	bool SaveSingleChannelToBitmapFile(const char *pFileName, int nChannel, int nInScale, int nOutScale, int nOffset);
 	bool SaveBGRHToBitmapFile(char *pFileName, int nB, int nG, int nR, int nH);
 };
 #endif

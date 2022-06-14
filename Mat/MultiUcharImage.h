@@ -53,12 +53,12 @@ public:
 	bool AddBackEdgeImage(MultiUcharImage * pInputImage, MultiShortImage * pInputEdgeImage);
 	bool GaussPyramidImage(MultiUcharImage * pOutPyramid, MultiShortImage * pOutEdgePyramid, int & nPyramidLevel);
 	bool ResizeCubicImage(MultiUcharImage *pOutImage, int OutnWidth, int OutnHeight);
-	bool SaveBGRToBitmapFile(char *pFileName, bool bVFilp = true);
-	bool SaveRGBToBitmapFile(char *pFileName, bool bVFilp = true);
-	bool LoadBitmapFileToBGR(char *pFileName);
-	bool LoadBitmapFileToRGB(char *pFileName);
-	bool SaveRGBToJpegFile(char *pFileName, int Quality = 100);
-	bool SaveBGRToJpegFile(char *pFileName, int Quality = 100);
+	bool SaveBGRToBitmapFile(const char *pFileName, bool bVFilp = true);
+	bool SaveRGBToBitmapFile(const char *pFileName, bool bVFilp = true);
+	bool LoadBitmapFileToBGR(const char *pFileName);
+	bool LoadBitmapFileToRGB(const char *pFileName);
+	bool SaveRGBToJpegFile(const char *pFileName, int Quality = 100);
+	bool SaveBGRToJpegFile(const char *pFileName, int Quality = 100);
 };
 #endif
 

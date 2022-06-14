@@ -116,7 +116,7 @@ void MultiUcharImage::HistMapping(int map[3][256], MultiUcharImage *pOutImage)
 			for (int x = 0; x < nWidth; x++)
 			{
 				for (int cl = 0; cl < 3; cl++)
-					dstLine[3 * x + cl] = (unsigned char)map[cl][srcLine[3 * x + cl]];//²é±íÓÃÓ³Éämap½«ÏñËØÖµÓ³Éäµ½ÏëÒªµÄ´óÐ¡
+					dstLine[3 * x + cl] = (unsigned char)map[cl][srcLine[3 * x + cl]];//ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÓ³ï¿½äµ½ï¿½ï¿½Òªï¿½Ä´ï¿½Ð¡
 			}
 		}
 	}
@@ -152,7 +152,7 @@ float MultiUcharImage::GetMeanHue()
 			RGB[0] = pInline[0];
 			RGB[1] = pInline[1];
 			RGB[2] = pInline[2];
-			RGBToHSVf((float)RGB[0], (float)RGB[1], (float)RGB[2], (float)tmpHSV[0], (float)tmpHSV[1], (float)tmpHSV[2]);
+			RGBToHSVf((float)RGB[0], (float)RGB[1], (float)RGB[2], tmpHSV[0],  tmpHSV[1], tmpHSV[2]);
 			nSumHSV0 += tmpHSV[0];
 			nSumHSV1 += tmpHSV[1];
 			nSumHSV2 += tmpHSV[2];
@@ -183,7 +183,7 @@ float MultiUcharImage::GetMeanHSV_V()
 			RGB[0] = pInline[0];
 			RGB[1] = pInline[1];
 			RGB[2] = pInline[2];
-			RGBToHSVf((float)RGB[0], (float)RGB[1], (float)RGB[2], (float)tmpHSV[0], (float)tmpHSV[1], (float)tmpHSV[2]);
+			RGBToHSVf((float)RGB[0], (float)RGB[1], (float)RGB[2], tmpHSV[0], tmpHSV[1], tmpHSV[2]);
 			nSumHSV0 += tmpHSV[0];
 			nSumHSV1 += tmpHSV[1];
 			nSumHSV2 += tmpHSV[2];
@@ -1408,7 +1408,7 @@ bool MultiUcharImage::CopyExtendRect(MultiUcharImage *pInputImage, int nLeft, in
 	}
 	return true;
 }
-bool MultiUcharImage::SaveBGRToBitmapFile(char *pFileName, bool bVFilp)
+bool MultiUcharImage::SaveBGRToBitmapFile(const char *pFileName, bool bVFilp)
 {
 	int i;
 	BITMAPFILEHEADER BmpFileHdr;
@@ -1471,7 +1471,7 @@ bool MultiUcharImage::SaveBGRToBitmapFile(char *pFileName, bool bVFilp)
 	free(pInfo);
 	return true;
 }
-bool MultiUcharImage::SaveRGBToBitmapFile(char *pFileName, bool bVFilp)
+bool MultiUcharImage::SaveRGBToBitmapFile(const char *pFileName, bool bVFilp)
 {
 	BITMAPFILEHEADER BmpFileHdr;
 	BITMAPINFO *pInfo;
@@ -1539,7 +1539,7 @@ bool MultiUcharImage::SaveRGBToBitmapFile(char *pFileName, bool bVFilp)
 	free(pInfo);
 	return true;
 }
-bool MultiUcharImage::LoadBitmapFileToBGR(char *pFileName)
+bool MultiUcharImage::LoadBitmapFileToBGR(const char *pFileName)
 {
 	int i;
 	long nBitsSize, nBISize;
@@ -1599,7 +1599,7 @@ bool MultiUcharImage::LoadBitmapFileToBGR(char *pFileName)
 	delete[] pBuffer;
 	return true;
 }
-bool MultiUcharImage::LoadBitmapFileToRGB(char *pFileName)
+bool MultiUcharImage::LoadBitmapFileToRGB(const char *pFileName)
 {
 	int i;
 	long nBitsSize, nBISize;
@@ -1666,7 +1666,7 @@ bool MultiUcharImage::LoadBitmapFileToRGB(char *pFileName)
 	delete[] pBuffer;
 	return true;
 }
-bool MultiUcharImage::SaveRGBToJpegFile(char * pFileName,int Quality)
+bool MultiUcharImage::SaveRGBToJpegFile(const char * pFileName,int Quality)
 {
 	SingleUcharImage Ydata;
 	SingleUcharImage udata;
@@ -1691,7 +1691,7 @@ bool MultiUcharImage::SaveRGBToJpegFile(char * pFileName,int Quality)
 	fclose(fp);
 	return true;
 }
-bool MultiUcharImage::SaveBGRToJpegFile(char * pFileName, int Quality)
+bool MultiUcharImage::SaveBGRToJpegFile(const char * pFileName, int Quality)
 {
 	SingleUcharImage Ydata;
 	SingleUcharImage udata;

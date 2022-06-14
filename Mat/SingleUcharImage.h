@@ -13,8 +13,8 @@ class MultIntImage;
 class SingleUcharImage: public CImageData_UINT8
 {
 public:
-	unsigned char *operator[](int y) { return m_pImgData + y * m_nWidth; }//©ирт╤ах║©иртпч╦д
-	const unsigned char *operator[](int y) const { return m_pImgData + y * m_nWidth; }//©ирт╤ах║╡╩©ипч╦д
+	unsigned char *operator[](int y) { return m_pImgData + y * m_nWidth; }//О©╫О©╫О©╫т╤О©╫х║О©╫О©╫О©╫О©╫О©╫ч╦О©╫
+	const unsigned char *operator[](int y) const { return m_pImgData + y * m_nWidth; }//О©╫О©╫О©╫т╤О©╫х║О©╫О©╫О©╫О©╫О©╫ч╦О©╫
 	//int *  operator [](int m){	return &a[m *col];}
 	bool Clone(SingleUcharImage *pInImage);
 	bool CreateImage(int nWidth, int nHeight);
@@ -63,8 +63,8 @@ public:
 	bool ResizeCubicImage(SingleUcharImage *pOutImage,int OutnWidth,int OutnHeight);
 	bool ResizeNearestNeighborImage(SingleUcharImage * pOutImage, int OutnWidth, int OutnHeight);
 	bool AddBackEdgeImage(SingleUcharImage *pInputImage, MultiShortImage *pInputEdgeImage);
-	bool SaveGrayToBitmapFile(char *pFileName);
-	bool LoadBitmapFileToGray(char *pFileName);
+	bool SaveGrayToBitmapFile(const char *pFileName);
+	bool LoadBitmapFileToGray(const char *pFileName);
 };
 #endif
 

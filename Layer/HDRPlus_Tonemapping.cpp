@@ -19,7 +19,7 @@ bool CHDRPlus_Tonemapping::ConvertoGray(MultiUshortImage *pRGBImage, MultiUshort
 		unsigned short *pGrayLine = pGrayImage->GetImageLine(y);
 		for (int x = 0; x < nWidth; x++)
 		{
-			//pGrayLine[0] = (pRGBLine[0] + (pRGBLine[1]<<1) + pRGBLine[2])>>2;//ÕâÖÖÆ½¾ù»áÒýÆð¸ß¹âÎ¢Èí¹ýÆØ
+			//pGrayLine[0] = (pRGBLine[0] + (pRGBLine[1]<<1) + pRGBLine[2])>>2;//ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¹ï¿½Î¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			unsigned int tmp = (pRGBLine[0] + pRGBLine[1] + pRGBLine[2]);
 			pGrayLine[0] = table[tmp];
 			pGrayLine++;
@@ -27,7 +27,9 @@ bool CHDRPlus_Tonemapping::ConvertoGray(MultiUshortImage *pRGBImage, MultiUshort
 		}
 	}
 	delete[]table;
+	return true;
 }
+
 bool CHDRPlus_Tonemapping::Brighten(MultiUshortImage *pInDarkImage, float gain, MultiUshortImage *pOutBrightImage)
 {
 	int nWidth = pInDarkImage->GetImageWidth();
@@ -150,6 +152,7 @@ bool CHDRPlus_Tonemapping::GammaInverse(MultiUshortImage *pInGrayImage, MultiUsh
 		}
 	}
 	delete[]table;
+	return true;
 }
 bool CHDRPlus_Tonemapping::BuildWeight(MultiUshortImage *pDarkGammaImage, MultiUshortImage *pBrightGammaImage, MultiUshortImage *DarkWeightImage, MultiUshortImage *BrightWeightImage, int ScaleBit)
 {
@@ -180,10 +183,10 @@ bool CHDRPlus_Tonemapping::BuildWeight(MultiUshortImage *pDarkGammaImage, MultiU
 		unsigned short *pBrightWeightline = BrightWeightImage->GetImageLine(y);
 		for (int x = 0; x < nWidth; x++)
 		{
-			float DarkCurve = WeightTable[pDarkgammaline[0]];//°µÍ¼ÇúÏß
-			float BrightCurve = WeightTable[pBrightgammaline[0]];//ÁÁÍ¼ÇúÏß
-			float DarkWeight = (DarkCurve / (DarkCurve + BrightCurve));//°µÍ¼È¨ÖØ
-			float BrightWeight = (1.f - DarkWeight);//ÁÁÍ¼È¨ÖØ=BrightCurve / (DarkCurve + BrightCurve)
+			float DarkCurve = WeightTable[pDarkgammaline[0]];//ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+			float BrightCurve = WeightTable[pBrightgammaline[0]];//ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+			float DarkWeight = (DarkCurve / (DarkCurve + BrightCurve));//ï¿½ï¿½Í¼È¨ï¿½ï¿½
+			float BrightWeight = (1.f - DarkWeight);//ï¿½ï¿½Í¼È¨ï¿½ï¿½=BrightCurve / (DarkCurve + BrightCurve)
 			pDarkWeightline[0] = DarkWeight * ScaleValue;
 			pBrightWeightline[0] = BrightWeight * ScaleValue;
 			pDarkgammaline++;
@@ -208,11 +211,11 @@ bool CHDRPlus_Tonemapping::CombineDarkAndBrightImage(MultiUshortImage *pDarkGamm
 	pDarkGammaImage->GaussPyramidImage(DarkImagePyramid, DarkImagePyramidEdge, nPyramidLevel, true);
 	pBrightGammaImage->GaussPyramidImage(BrightImagePyramid, BrightImagePyramidEdge, nPyramidLevel, true);
 	BuildWeight(pDarkGammaImage, pBrightGammaImage, &DarkWeightImage, &BrightWeightImage, ScaleBit);
-	DarkWeightImage.GaussPyramidImage(DarkWeightImagePyramid, NULL, nPyramidLevel, false);//×î´óÖµÊÇ4096
+	DarkWeightImage.GaussPyramidImage(DarkWeightImagePyramid, NULL, nPyramidLevel, false);//ï¿½ï¿½ï¿½Öµï¿½ï¿½4096
 	BrightWeightImage.GaussPyramidImage(BrightWeightImagePyramid, NULL, nPyramidLevel, false);
 	MultiUshortImage TempImage;
 	DarkImagePyramid[nPyramidLevel].ApplyWeight(&DarkWeightImagePyramid[nPyramidLevel], ScaleBit);
-	BrightImagePyramid[nPyramidLevel].ApplyWeight(&BrightWeightImagePyramid[nPyramidLevel], ScaleBit);//ÒÑ¾­³ýÁË4096
+	BrightImagePyramid[nPyramidLevel].ApplyWeight(&BrightWeightImagePyramid[nPyramidLevel], ScaleBit);//ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½4096
 	DarkImagePyramid[nPyramidLevel].AddImage(&BrightImagePyramid[nPyramidLevel]);
 	pOutCombineImage->Clone(&DarkImagePyramid[nPyramidLevel]);
 	for (int i = nPyramidLevel - 1; i >= 0; i--)
@@ -424,7 +427,7 @@ bool CHDRPlus_Tonemapping::EstimateDigiGain(MultiUshortImage *pInImage, TGlobalC
 	C[0]= 0;
 	for (y = y1 = 0, m = 0; y < nHeight; y++)
 	{
-		WORD *pCFA = pInImage->GetImageLine(y);
+		uint16_t *pCFA = pInImage->GetImageLine(y);
 		W = m_nBlockWeightMap[m][0];
 		for (x = x1 = 0,  n = 0; x < nWidth; x++)
 		{
@@ -542,7 +545,7 @@ bool CHDRPlus_Tonemapping::Forward(MultiUshortImage *pInRGBImage,TGlobalControl 
 		}
 		else
 		{
-			nGain = pControl->nEQGain;//lenshadingÖ®ºóµÄ
+			nGain = pControl->nEQGain;//lenshadingÖ®ï¿½ï¿½ï¿½
 		}
 		if (nGain < m_nGainList[0])
 		{
@@ -579,8 +582,8 @@ bool CHDRPlus_Tonemapping::Forward(MultiUshortImage *pInRGBImage,TGlobalControl 
 	MultiUshortImage DarkOutImage;
 	ConvertoGray(pInRGBImage, &GrayImage);
 	if (!EstimateDigiGain(&GrayImage, pControl))return false;
-	float comp = (float)m_nDynamicCompression/(float)128;// 5.8f;//°µ¹âÌáÁÁ
-	float gain =  (float)pControl->nDigiGain / (float)128;// 0.5f;//¸ß¹âÑ¹ÖÆ
+	float comp = (float)m_nDynamicCompression/(float)128;// 5.8f;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	float gain =  (float)pControl->nDigiGain / (float)128;// 0.5f;//ï¿½ß¹ï¿½Ñ¹ï¿½ï¿½
 	float comp_const = 1.f + comp / m_nVirtualExposureNum;
 	float gain_const = 1.f + gain / m_nVirtualExposureNum;
 	float comp_slope = (comp - comp_const) / (float)(m_nVirtualExposureNum - 1);
@@ -590,8 +593,8 @@ bool CHDRPlus_Tonemapping::Forward(MultiUshortImage *pInRGBImage,TGlobalControl 
 	{
 		//float norm_comp = (pass + 1) * comp_slope + 1.0;
 		//float norm_gain = (pass+1) * gain_slope + 1.0;
-		float norm_comp = pass * comp_slope + comp_const;//Ôö´ó
-		float norm_gain = pass * gain_slope + gain_const;//¼õÐ¡
+		float norm_comp = pass * comp_slope + comp_const;//ï¿½ï¿½ï¿½ï¿½
+		float norm_gain = pass * gain_slope + gain_const;//ï¿½ï¿½Ð¡
 		printf("norm_comp=%f norm_gain=%f \n", norm_comp, norm_gain);
 		Brighten(&DarkImage, norm_comp, &BrightImage);
 		GrayGammaCorrect(&DarkImage, &DarkGammaImage);

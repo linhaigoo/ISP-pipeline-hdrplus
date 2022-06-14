@@ -150,7 +150,8 @@ bool SingleUcharImage::GetIntegralHistogram(CImageData_UINT32  *pOutIntegralHist
 	CImageData_UINT16 IntegralImage;
 	IntegralImage.SetImageSize(nWidth, nHeight,1);
 	unsigned short *pIntegralliney0 = IntegralImage.GetImageLine(0);
-	pIntegralliney0[0] =(unsigned short)this[0][0];
+	char varTmp = (*this)[0][0];
+	pIntegralliney0[0] =(unsigned short)(varTmp);
 	for (int y = 1; y < nHeight; ++y)
 	{
 		unsigned short *pIntegralline0 = IntegralImage.GetImageLine(y - 1);
@@ -883,7 +884,7 @@ bool SingleUcharImage::Bilateral5x5Image(SingleUcharImage *pOutImage,int nThre)
 	}
 	return true;
 }
-bool SingleUcharImage::Extend2Image(int nS)//2µÄx´Î·½
+bool SingleUcharImage::Extend2Image(int nS)//2ï¿½ï¿½xï¿½Î·ï¿½
 {
 	SingleUcharImage tmpOutImage;
 	if (nS < 0)return false;
@@ -1301,7 +1302,7 @@ bool SingleUcharImage::ResizeNearestNeighborImage(SingleUcharImage *pOutImage, i
 	}
 	return true;
 }
-bool SingleUcharImage::SaveGrayToBitmapFile(char *pFileName)
+bool SingleUcharImage::SaveGrayToBitmapFile(const char *pFileName)
 {
 	int i, j;
 	BITMAPFILEHEADER BmpFileHdr;
@@ -1363,7 +1364,7 @@ bool SingleUcharImage::SaveGrayToBitmapFile(char *pFileName)
 	free(pInfo);
 	return true;
 }
-bool SingleUcharImage::LoadBitmapFileToGray(char *pFileName)
+bool SingleUcharImage::LoadBitmapFileToGray(const char *pFileName)
 {
 	int i, j;
 	long nBitsSize, nBISize;

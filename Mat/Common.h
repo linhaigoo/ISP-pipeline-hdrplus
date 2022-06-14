@@ -2,6 +2,7 @@
 #define __Common_function_H__
 #include "Basicdef.h"
 #include "SubFunction.h"
+#include "SystemLog.h"
 const short nMask[25] = {
 	1,	4,	6,	4,	1,
 	4, 16, 24, 16,	4,
@@ -57,7 +58,7 @@ extern inline void CalCubicCoef(double f, short *pCoefs);
 extern bool RescaleCubicData(unsigned char *pInImage, unsigned char *pOutImage, int nChannel, int nInWidth, int nInHeight, int nOutWidth, int nOutHeight);
 extern void NonMaximumLine(float *pInLines[], int nY, int nWidth, int nPitch, TFeaturePoint *pPtList, int &nPtNum, int nMaxNum);
 extern void ComputeCornernessLine(unsigned char *pInLines[], float *pOutLine, int nWidth, int nPitch, float fHarris_K, int nHarrisThre, int nRatio, int nPtThre1, int nPtThre2, int nThre);
-extern __inline float ComputeHarrisCorner(unsigned char nYWin[][11], int x, int y, float fHarris_K);
+extern float ComputeHarrisCorner(unsigned char nYWin[][11], int x, int y, float fHarris_K);
 extern void HAvg3Line(unsigned short *pInLine, unsigned short *pOutLine, int nChannel, int nWidth);
 extern void VAvg3Line(unsigned short *pInLines[], unsigned short *pOutLine, int nChannel, int nWidth);
 extern void HAvg5Line(unsigned short *pInLine, unsigned int *pOutLine, int nChannel, int nWidth);

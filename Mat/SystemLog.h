@@ -7,7 +7,7 @@
 #include <windows.h>
 #include "NEONToSSE.h"
 #elif  defined __linux__
-
+#include "NEONToSSE.h"
 #else
 #include <jni.h>
 #include "arm_neon.h"
