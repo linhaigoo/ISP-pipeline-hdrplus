@@ -93,6 +93,10 @@ int main(int argc, char* argv[]) {
 	sprintf(Parampathname, "%s", argv[3]);
 	FILE *fptxt = fopen(Parampathname, "wb");
 	LibRaw RawProcessor;
+	if(argc < 4)
+	{
+	printf("args: Inpathname outpathname Parampathname \n");
+	}
 	if (int err = RawProcessor.open_file(Inpathname))
 	{
 		printf("fail\n");
